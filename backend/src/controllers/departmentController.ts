@@ -19,3 +19,5 @@ export const getAllDepartmentsWithFaculty = async (c: any) => {
     );
   }
 };
+
+// 

@@ -1,5 +1,5 @@
 import conMysql from "../ultis/connectDB";
-import { researcher, prename, department } from "../db/schema";
+import { researcher, prename, department , faculty} from "../db/schema";
 import { sql } from "drizzle-orm";
 
 const db = await conMysql();
@@ -68,6 +68,46 @@ export const getResearcherById = async (c: any) => {
       console.error(error);
       return c.json(
         { error: "Failed to retrieve researcher.", details: (error as any).message },
+        500
+      );
+    }
+  };
+
+
+  export const getResearchersByName = async (c: any) => {
+    try {
+      const name = c.req.query("name"); // รับค่า name จาก query paramete
+      if (!name) {
+        return c.json({ error: "Name is required." }, 400);
+      }
+  
+      const researchers = await db
+        .select({
+          id: researcher.id,
+          name: researcher.name,
+          surname: researcher.surname,
+          telNo: researcher.telNo,
+          email: researcher.email,
+          prename: prename.description, 
+          department: department.description, 
+          faculty: faculty.description, 
+        })
+        .from(researcher)
+        .leftJoin(prename, sql`${researcher.prenameId} = ${prename.id}`)
+        .leftJoin(department, sql`${researcher.departmentId} = ${department.id}`)
+        .leftJoin(faculty, sql`${department.facultyId} = ${faculty.id}`)
+        .where(sql`${researcher.name} LIKE ${'%' + name + '%'}`) // ใช้ wildcard
+        .limit(10);
+  
+      if (researchers.length === 0) {
+        return c.json({ message: "No researchers found." }, 404);
+      }
+  
+      return c.json(researchers, 200);
+    } catch (error) {
+      console.error(error);
+      return c.json(
+        { error: "Failed to retrieve researchers.", details: (error as any).message },
         500
       );
     }

@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import { loginStaff } from "../controllers/loginController";
+import { loginStaffResearcher } from "../controllers/loginController";
 
 const loginRoutes = new Hono();
 
-loginRoutes.post("/", loginStaff);
+loginRoutes.post("/", loginStaffResearcher);
 
 export default loginRoutes;
