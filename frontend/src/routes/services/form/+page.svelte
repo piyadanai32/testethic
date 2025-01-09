@@ -7,7 +7,9 @@
     title_th: string;
     title_en: string;
     objectiveId: string;
+    objectiveOther: string;
     grantId: string;
+    grantOther: string;
     typeId: string;
     statusId: string;
     researcherId: string;
@@ -21,7 +23,9 @@
     title_th: '',
     title_en: '',
     objectiveId: '',
+    objectiveOther: '',
     grantId: '',
+    grantOther: '',
     typeId: '',
     statusId: '',
     researcherId: '',
@@ -32,7 +36,6 @@
 
   const submissionStatus = writable('');
 
-  // แก้ไข event parameter เพื่อให้ TypeScript เข้าใจประเภทของ event
   const addPetition = async (event: Event) => {
     event.preventDefault(); // ใช้ preventDefault ในฟังก์ชันเอง
 
@@ -52,7 +55,9 @@
           title_th: '',
           title_en: '',
           objectiveId: '',
+          objectiveOther: '',
           grantId: '',
+          grantOther: '',
           typeId: '',
           statusId: '',
           researcherId: '',
@@ -71,64 +76,18 @@
   };
 </script>
 
-<style>
-  .form-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-
-  input, textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #666; /* สีพื้นหลังเทา */
-    color: white; /* ตัวอักษรสีขาว */
-  }
-
-  input::placeholder, textarea::placeholder {
-    color: #ddd; /* เปลี่ยนสีตัวอักษร placeholder เป็นสีเทา */
-  }
-
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-
-  .status-message {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 18px;
-  }
-</style>
-
-
 <div class="form-container">
   <h2>Add New Petition</h2>
   
   <form on:submit={addPetition}>
-    <input type="text" bind:value={formData.correspondenceNo} placeholder="Correspondence No" required />
-    <input type="text" bind:value={formData.title_th} placeholder="Title (TH)" required />
-    <input type="text" bind:value={formData.title_en} placeholder="Title (EN)" required />
+    <input type="text" bind:value={formData.correspondenceNo} placeholder="ที่" required />
+    <input type="text" bind:value={formData.title_th} placeholder="ชื่อภาษาไทย" required />
+    <input type="text" bind:value={formData.title_en} placeholder="ชื่ออังกฤษ" required />
+
     <input type="text" bind:value={formData.objectiveId} placeholder="Objective ID" required />
+    <input type="text" bind:value={formData.objectiveOther} placeholder="Objective Other" />
     <input type="text" bind:value={formData.grantId} placeholder="Grant ID" required />
+    <input type="text" bind:value={formData.grantOther} placeholder="Grant Other" />
     <input type="text" bind:value={formData.typeId} placeholder="Type ID" required />
     <input type="text" bind:value={formData.statusId} placeholder="Status ID" required />
     <input type="text" bind:value={formData.researcherId} placeholder="Researcher ID" required />
@@ -145,3 +104,73 @@
     {/if}
   </div>
 </div>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  form {
+    display: grid;
+    gap: 16px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .status-message {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .status-message p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .status-message p {
+    color: green;
+  }
+</style>
