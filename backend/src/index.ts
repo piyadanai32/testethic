@@ -8,7 +8,6 @@ import staffRoutes from "./routes/staffRoutes";
 import researcherRoutes from "./routes/researcherRoutes"
 import petitionRoutes from "./routes/petitionRoutes";
 import committeeRoutes from "./routes/committeeRoutes";
-import pettitionFiles from "./routes/pettitionfileRoutes";
 import petitioncommitteeRoutes from "./routes/petitioncommitteeRoutes";
 import departmentRoutes from "./routes/departmentRoutes";
 
@@ -24,7 +23,6 @@ app.route("/staff", staffRoutes);
 app.route("/researchers", researcherRoutes);
 app.route("/petitions", petitionRoutes);
 app.route("/committees", committeeRoutes);
-app.route("/pettitionfiles", pettitionFiles);
 
 
 app.route("/petitioncommittee",petitioncommitteeRoutes);
