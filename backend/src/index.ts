@@ -10,6 +10,7 @@ import petitionRoutes from "./routes/petitionRoutes";
 import committeeRoutes from "./routes/committeeRoutes";
 import petitioncommitteeRoutes from "./routes/petitioncommitteeRoutes";
 import departmentRoutes from "./routes/departmentRoutes";
+import loginRoutes from "./routes/loginRoutes";
 
 const app = new Hono();
 
@@ -28,6 +29,7 @@ app.route("/committees", committeeRoutes);
 app.route("/petitioncommittee",petitioncommitteeRoutes);
 app.route("/departments",departmentRoutes);
 
+app.route("/login",loginRoutes);
 
 export default {
   host: "0.0.0.0",
